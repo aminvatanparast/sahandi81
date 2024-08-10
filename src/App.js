@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React , {useEffect, useRef} from 'react';
+import {Route, Routes, useLocation} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {isAuthenticatedSelector} from "./store/user/user.selector.js";
+import {filterRoutesByAuthStep} from "./configs/routes.js";
+import {initFlowbite} from "flowbite";
+import NotFound from "./pages/NotFound/NotFound";
 
-function App() {
+const App = () => {
+  const scrollRef = useRef(null);
+  const { pathname } = useLocation();
+  const isAuth = useSelector(isAuthenticatedSelector);
+  const routes = filterRoutesByAuthStep(isAuth);
+
+  useEffect(() => {
+    initFlowbite()
+  } , [])
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView?.({ behavior: 'smooth' });
+  }, [pathname]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div ref={scrollRef} />
+
+      <Routes>
+        {routes.map((item) => (
+          <Route key={item.route} path={item.route} element={item.Element} />
+        ))}
+        <Route path={"*"} element={<NotFound/>} />
+      </Routes>
+    </>
   );
-}
+};
 
 export default App;

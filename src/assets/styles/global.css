@@ -1,0 +1,89 @@
+@import '../fonts/IRANYekanX/Webfonts/fontiran.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    margin-right: auto;
+    margin-left: auto;
+    scroll-behavior: smooth;
+}
+
+body {
+    position: relative;
+    font-family: "IRANYekanX" !important;
+    padding: 0;
+    margin: 0 auto;
+}
+*::-webkit-scrollbar {
+  width: 3px;
+}
+/* Track */
+*::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #F30000;
+  border-radius: 10px;
+}
+/* Handle */
+*::-webkit-scrollbar-thumb {
+  background: #F30000;
+  border-radius: 10px;
+}
+html,
+body {
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+    height: 100%;
+    outline: none;
+}
+
+div[id="root"] {
+     overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+    height: 100%;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: IRANYekanX !important;
+    -moz-font-feature-settings: "ss02";
+    -webkit-font-feature-settings: "ss02";
+    font-feature-settings: "ss02";
+    outline: none;
+
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.css-qpgcq-MuiButtonBase-root-MuiCheckbox-root.Mui-checked, .css-qpgcq-MuiButtonBase-root-MuiCheckbox-root.MuiCheckbox-indeterminate {
+    color: #eee !important;
+}
+.css-qpgcq-MuiButtonBase-root-MuiCheckbox-root:hover {
+    background-color: rgba(0, 0, 0, 0.04) !important;
+}
+
+.flexCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spaceBetween {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mainLoading {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
