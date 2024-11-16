@@ -5,9 +5,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
  import App from './App.js';
-import Layout from './components/Layout/index.js';
-import './configs/configAxios.js';
-import './assets/styles/global.css';
+  import './assets/styles/global.css';
 import Loading from "./components/Loading/index.jsx";
 import {persistor, store} from "./store";
 

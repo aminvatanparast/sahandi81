@@ -1,23 +1,23 @@
 import { useState } from 'react';
 import { beforeAuthRoutes } from '../../../configs/routes.js';
-import { sendOtp } from '../../../apis/auth';
 import {Link, useNavigate} from "react-router-dom";
 import CustomInput from "../../../components/UI/customInput/customInput";
 import CustomButton from "../../../components/UI/customButton/customButton";
 import {AppleIcon, GoogleIcon} from "../../../icons/icons";
+import Api from "../../../apis/axios";
 
 const Login = () => {
   const navigate = useNavigate();
   const [msisdn, setMsisdn] = useState('');
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState([]);
+  const api = new Api()
 
-  async function handleSubmit(event) {
-    event.preventDefault();
+  async function handleSubmit() {
     setLoading(true);
 
-    sendOtp(msisdn)
-      .then(() => navigate(beforeAuthRoutes.Otp, { state: { msisdn } }))
+    api.post("login" , form)
+      .then((res) => console.log(res))
       .finally(() => setLoading(false));
   }
 
@@ -26,9 +26,9 @@ const Login = () => {
   }
 
   return (
-    <div className="min-h-[766px] 2xl:min-h-screen bg-gray-100 text-gray-900 flex justify-center ">
+    <div className="min-h-[766px] 2xl:min-h-screen bg-gray-100 text-gray-900 flex justify-center 2xl:items-center ">
       <div
-        className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex  justify-center flex-1">
+        className="max-w-screen-xl  2xl:min-h-[845px] m-0 sm:m-10 bg-white shadow sm:rounded-lg flex  justify-center flex-1">
         <div className="w-full flex flex-col justify-center lg:w-1/2 xl:w-1/2 p-6 sm:p-12 bg-cover bg-contain bg-center bg-no-repeat" style={{backgroundImage: "url('/bord.svg')"}}>
 
           <div className="mt-12 flex flex-col items-center lg:px-16 lg:mr-[27px]">
@@ -51,7 +51,7 @@ const Login = () => {
                 />
                 <div className={"flex gap-5 items-center mt-3"}>
                   <div className={"w-1/2 "}>
-                    <CustomButton onClick={() => console.log("clicked")} title={'Sign Up'} loading={false}/>
+                    <CustomButton onClick={() => handleSubmit()} title={'Sign Up'} loading={false}/>
                   </div>
 
                   <div className="flex justify-between items-center gap-5 w-1/2">
@@ -84,7 +84,7 @@ const Login = () => {
           </div>
         </div>
         <div className="flex-1 bg-indigo-100 text-center hidden lg:flex">
-          <div className="bg-auto w-full bg-auto bg-center bg-no-repeat rounded-l-[34px] w-[120%] left-[-20px] ml-[-25px] z-20 shadow-left-lg shadow-gray-900     "
+          <div className="bg-auto w-[110%] bg-auto bg-center bg-no-repeat rounded-l-[34px] w-[120%] left-[-20px] ml-[-25px] z-20 shadow-left-lg shadow-gray-900     "
                style={{backgroundImage: "url('/left.svg')" ,  boxShadow: "-10px 0 20px -5px rgba(115,115,115,0.5)"}}>
           </div>
         </div>

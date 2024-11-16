@@ -1,4 +1,4 @@
-import {register} from '../../../apis/auth';
+import Api, {register} from '../../../apis/axios';
 import {beforeAuthRoutes} from '../../../configs/routes.js';
 import {useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
@@ -11,13 +11,13 @@ const Register = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState([]);
   const [loading, setLoading] = useState(false);
+  const api = new Api()
 
-  async function handleSubmit(event) {
-    event.preventDefault();
-    setLoading(true);
+  async function handleSubmit() {
+     setLoading(true);
 
-    register(form.firstName, form.lastName, form.msisdn,)
-      .then(() => navigate(beforeAuthRoutes.Otp))
+    api.post("register" , form)
+      .then((res) => console.log(res))
       .finally(() => setLoading(false));
   }
 
@@ -26,9 +26,9 @@ const Register = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
+    <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center 2xl:items-center">
       <div
-        className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex  justify-center flex-1">
+        className="max-w-screen-xl   2xl:min-h-[845px] m-0 sm:m-10 bg-white shadow sm:rounded-lg flex  justify-center flex-1">
         <div className="w-full lg:w-1/2 xl:w-1/2 p-6 sm:p-12 bg-cover bg-contain bg-center bg-no-repeat" style={{backgroundImage: "url('/bord.svg')"}}>
 
           <div className="mt-12 flex flex-col items-center lg:px-16">
@@ -92,9 +92,14 @@ const Register = () => {
                   onchange={(e) => handleForm(e)}
                 />
 
-                <CustomCheckBox/>
+                <CustomCheckBox
+                  defaultValue={false}
+                  name={"accept"}
+                  type={"checkBox"}
+                  onchange={(e) => handleForm(e)}
+                />
 
-                <CustomButton onClick={() => console.log("clicked")} title={'Sign Up'} loading={false}/>
+                <CustomButton disable={form.accept} onClick={() => handleSubmit()} title={'Sign Up'} loading={false}/>
 
                 <p className="mt-6 text-md font-bold text-gray-600 text-center">
                   already have an account sign in?

@@ -1,9 +1,16 @@
-import React from 'react';
+import React , {useState} from 'react';
 
-const CustomCheckBox = () => {
+const CustomCheckBox = ({name , onchange , defaultValue}) => {
+  const [value, setValue] = useState(defaultValue)
+
+  const handleChange = (e) => {
+    onchange({name:e.target.name, value:!value})
+    setValue(!value)
+  }
+
   return (
     <div className="flex items-center  ">
-      <input id="remember_me" name="remember_me" type="checkbox"
+      <input value={value} onChange={(e) => handleChange(e)} id="remember_me" name={name} type="checkbox"
              className="h-4 w-4 text-main focus:ring-main border-gray-300 rounded-full"/>
       <label htmlFor="remember_me" className="cursor-pointer ml-2 mt-1 block text-sm text-gray-900">
         i accept

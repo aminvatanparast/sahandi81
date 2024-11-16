@@ -1,4 +1,4 @@
-import {store} from "../store/index.js";
+import {store} from "../store";
 
 export const logout = async () => {
   store.dispatch({ type: 'LOGOUT' });

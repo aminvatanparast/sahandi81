@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 
 const CustomInput = ({placeHolder, type = "text", onchange, name}) => {
-  const [value, setvalue] = useState()
+  const [value, setValue] = useState()
   const handleChange = (e) => {
-    onchange({name, value})
-    setvalue(e.target.value)
+    onchange({name:e.target.name, value:e.target.value})
+    setValue(e.target.value)
   }
   return (
     <>

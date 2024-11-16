@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { sendOtp, verifyOtp } from '../../../apis/auth';
+import { sendOtp, verifyOtp } from '../../../apis/axios';
 import { useDispatch } from 'react-redux';
 import { toggleAuth } from '../../../store/user/user.reducer';
 import { afterAuthRoutes } from '../../../configs/routes.js';
@@ -19,12 +19,6 @@ const Otp = () => {
     event?.preventDefault();
     setLoading(true);
 
-    verifyOtp(msisdn, otp)
-      .then((res) => {
-        dispatch(toggleAuth({ ...res }));
-        navigate(afterAuthRoutes.dashboard);
-      })
-      .finally(() => setLoading(false));
   }
 
 
